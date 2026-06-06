@@ -1,0 +1,326 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Google Fonts ────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+Arabic:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+
+/* ── CSS Variables — Light Mode ─────────────────────────── */
+:root {
+  --font-inter:        'Inter', sans-serif;
+  --font-noto-arabic:  'Noto Sans Arabic', sans-serif;
+
+  /* Surfaces */
+  --surface-0:   #ffffff;
+  --surface-50:  #f8fafc;
+  --surface-100: #f1f5f9;
+  --surface-200: #e2e8f0;
+  --surface-300: #cbd5e1;
+
+  /* Text */
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #94a3b8;
+  --text-inverse:   #ffffff;
+
+  /* Border */
+  --border: #e2e8f0;
+
+  /* Brand */
+  --brand-primary:   #1e3a5f;
+  --brand-secondary: #0d9488;
+  --brand-accent:    #f97316;
+
+  /* Sidebar */
+  --sidebar-bg:       #1e3a5f;
+  --sidebar-text:     rgba(255,255,255,0.85);
+  --sidebar-text-muted: rgba(255,255,255,0.5);
+  --sidebar-hover:    rgba(255,255,255,0.08);
+  --sidebar-active:   rgba(255,255,255,0.15);
+  --sidebar-border:   rgba(255,255,255,0.1);
+
+  /* Scrollbar */
+  --scrollbar-track: #f1f5f9;
+  --scrollbar-thumb: #cbd5e1;
+}
+
+/* ── Dark Mode ───────────────────────────────────────────── */
+.dark {
+  --surface-0:   #0f172a;
+  --surface-50:  #1e293b;
+  --surface-100: #273344;
+  --surface-200: #334155;
+  --surface-300: #475569;
+
+  --text-primary:   #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted:     #64748b;
+  --text-inverse:   #0f172a;
+
+  --border: #1e293b;
+
+  --scrollbar-track: #1e293b;
+  --scrollbar-thumb: #334155;
+}
+
+/* ── Base ────────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--surface-50);
+  color: var(--text-primary);
+  font-family: var(--font-inter);
+  line-height: 1.6;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* ── RTL Global ──────────────────────────────────────────── */
+[dir="rtl"] body,
+[dir="rtl"] * {
+  font-family: var(--font-noto-arabic);
+  letter-spacing: 0;
+}
+
+[dir="rtl"] .font-inter {
+  font-family: var(--font-inter);
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+/* Arabic numerals style */
+[dir="rtl"] .number {
+  font-family: 'Noto Naskh Arabic', serif;
+  font-variant-numeric: arabic-indic;
+}
+
+/* ── Layout Utilities ────────────────────────────────────── */
+.page-container {
+  padding: 1.5rem;
+  max-width: 100%;
+}
+
+.card {
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,.09);
+}
+
+/* ── Skeleton Loading ────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface-100) 25%,
+    var(--surface-200) 50%,
+    var(--surface-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s linear infinite;
+  border-radius: 6px;
+}
+
+/* ── Status Colors ───────────────────────────────────────── */
+.status-draft      { background: #f1f5f9; color: #64748b; }
+.status-pending    { background: #fef3c7; color: #92400e; }
+.status-confirmed  { background: #dbeafe; color: #1e40af; }
+.status-processing { background: #ede9fe; color: #5b21b6; }
+.status-shipped    { background: #d1fae5; color: #065f46; }
+.status-delivered  { background: #dcfce7; color: #14532d; }
+.status-cancelled  { background: #fee2e2; color: #991b1b; }
+.status-returned   { background: #ffedd5; color: #9a3412; }
+
+/* ── Form Styles ─────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.form-input {
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  outline: none;
+  width: 100%;
+}
+
+.form-input:focus {
+  border-color: #1e3a5f;
+  box-shadow: 0 0 0 3px rgba(30,58,95,.1);
+}
+
+.form-input.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239,68,68,.1);
+}
+
+[dir="rtl"] .form-input {
+  text-align: right;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  color: var(--sidebar-text);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sidebar-nav-item:hover {
+  background: var(--sidebar-hover);
+}
+
+.sidebar-nav-item.active {
+  background: var(--sidebar-active);
+  color: #ffffff;
+}
+
+[dir="rtl"] .sidebar-nav-item {
+  flex-direction: row-reverse;
+}
+
+/* ── Data Table ──────────────────────────────────────────── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.data-table thead tr {
+  background: var(--surface-50);
+  border-bottom: 1px solid var(--border);
+}
+
+.data-table thead th {
+  padding: 10px 14px;
+  text-align: start;
+  font-weight: 600;
+  color: var(--text-secondary);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+
+.data-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  transition: background 0.12s;
+}
+
+.data-table tbody tr:hover {
+  background: var(--surface-50);
+}
+
+.data-table tbody td {
+  padding: 11px 14px;
+  color: var(--text-primary);
+}
+
+/* ── Recharts custom ─────────────────────────────────────── */
+.recharts-tooltip-wrapper .custom-tooltip {
+  background: var(--surface-0);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.1);
+  font-size: 13px;
+}
+
+/* ── Drag & Drop ─────────────────────────────────────────── */
+.dropzone {
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.dropzone:hover,
+.dropzone.drag-active {
+  border-color: #1e3a5f;
+  background: rgba(30,58,95,.04);
+}
+
+/* ── Pulse animation for critical stock ──────────────────── */
+@keyframes criticalPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: .4; }
+}
+
+.badge-critical {
+  animation: criticalPulse 1.2s ease-in-out infinite;
+}
+
+/* ── Page transition ─────────────────────────────────────── */
+.page-enter {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.page-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+/* ── Print ───────────────────────────────────────────────── */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; font-size: 12px; }
+}
